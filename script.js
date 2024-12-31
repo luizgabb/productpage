@@ -9,12 +9,24 @@ let active = 0
 let firstPosition = 0
 let lastPosition = items.length - 1
 
+function setSlider() {
+    let itemOld = container.querySelector(".list .item.active")
+    itemOld.classList.remove("active") //remove a classe active
+
+    let dotsOld = indicator.querySelector("ul li.active")
+    dotsOld.classList.remove("active")
+    dots[active].classList.add("active")
+    indicator.querySelector(".number").innerText = "0" + (active + 1) //muda o dots
+}
 
 nextButton.onclick = () => {
-    let itemOld = container.querySelector(".list .item .active")
-    itemOld.classList.remove("active")
+    active = active + 1 > lastPosition ? 0 : active + 1
+    setSlider()
+    items[active].classList.add("active")//traz o item certo para a tela
 }
 
 prevButton.onclick = () => {
-    console.log("botao prev")
+    active = active - 1 < firstPosition ? lastPosition : active - 1
+    setSlider()
+    items[active].classList.add("active")
 }
